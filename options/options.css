@@ -1,0 +1,119 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f9f9fb;
+  --card: #fff;
+  --text: #15141a;
+  --muted: #5b5b66;
+  --border: #e0e0e6;
+  --accent: #0061e0;
+
+  font: 14px/1.45 system-ui, sans-serif;
+  accent-color: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1b22;
+    --card: #2b2a33;
+    --text: #fbfbfe;
+    --muted: #bfbfc9;
+    --border: #45444f;
+    --accent: #75b8ff;
+  }
+}
+
+body {
+  max-width: 40rem;
+  margin: 0;
+  padding: 1rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h2 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card {
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.5rem;
+  padding-block: 0.375rem;
+}
+
+.card > .row + .row,
+.card > .row + details {
+  border-top: 1px solid var(--border);
+}
+
+small {
+  display: block;
+  color: var(--muted);
+}
+
+.account-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.toggles {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.toggles label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+input[type="number"] {
+  width: 4.5em;
+}
+
+summary {
+  padding-block: 0.5rem;
+  color: var(--muted);
+  cursor: default;
+}
+
+.folders {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.folders li {
+  padding-inline-start: calc(var(--depth, 0) * 1.25rem);
+}
+
+.folders li + li {
+  border-top: 1px solid var(--border);
+}
+
+.folder-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hint {
+  color: var(--muted);
+}

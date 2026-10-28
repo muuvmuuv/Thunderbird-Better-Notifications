@@ -1,0 +1,21 @@
+[
+  {
+    "namespace": "unreadBadge",
+    "description": "Keeps chosen accounts out of the unread count on Thunderbird's app icon.",
+    "functions": [
+      {
+        "name": "setExcludedAccounts",
+        "type": "function",
+        "async": true,
+        "description": "Replaces the accounts the app icon badge leaves out and recounts the badge.",
+        "parameters": [
+          {
+            "name": "accountIds",
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        ]
+      }
+    ]
+  }
+]
