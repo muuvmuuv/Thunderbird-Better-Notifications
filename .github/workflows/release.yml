@@ -33,3 +33,36 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "$GITHUB_REF_NAME" better-notifications.xpi --generate-notes
+
+  # A job of its own, so a failed upload can be re-run without recreating the
+  # GitHub release. The new version then waits for ATN's manual review.
+  atn:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the add-on from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" -p better-notifications.xpi
+
+      - name: Upload to addons.thunderbird.net
+        env:
+          ATN_JWT_ISSUER: ${{ secrets.ATN_JWT_ISSUER }}
+          ATN_JWT_SECRET: ${{ secrets.ATN_JWT_SECRET }}
+        run: |
+          b64url() { openssl base64 -A | tr '+/' '-_' | tr -d '='; }
+          now=$(date +%s)
+          header=$(printf '{"alg":"HS256","typ":"JWT"}' | b64url)
+          payload=$(printf '{"iss":"%s","jti":"%s","iat":%d,"exp":%d}' "$ATN_JWT_ISSUER" "$(openssl rand -hex 16)" "$now" "$((now + 240))" | b64url)
+          signature=$(printf '%s.%s' "$header" "$payload" | openssl dgst -sha256 -hmac "$ATN_JWT_SECRET" -binary | b64url)
+
+          id=$(unzip -p better-notifications.xpi manifest.json | jq -r .browser_specific_settings.gecko.id)
+          status=$(curl -sS --retry 4 --retry-delay 15 -o response.json -w '%{http_code}' -X PUT \
+            -H "Authorization: JWT $header.$payload.$signature" \
+            -F upload=@better-notifications.xpi -F channel=listed \
+            "https://addons.thunderbird.net/api/v4/addons/$id/versions/${GITHUB_REF_NAME#v}/")
+          cat response.json
+          echo
+
+          # 409: the version is already on ATN, e.g. when the job is re-run.
+          [ "$status" = 201 ] || [ "$status" = 202 ] || [ "$status" = 409 ]
