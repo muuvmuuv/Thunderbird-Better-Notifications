@@ -1,6 +1,6 @@
 # Account Notify
 
-Thunderbird MailExtension for notifications per account and folder. Built following `PLAN.md`, phase by phase.
+Thunderbird MailExtension for notifications and the app icon badge per account and folder. `README.md` covers features, setup and known limitations.
 
 ## Stack
 
@@ -34,4 +34,4 @@ Thunderbird MailExtension for notifications per account and folder. Built follow
 
 1. Do not introduce a build step, a `package.json` or a linter setup. The release workflow only zips the files as they are.
 2. No telemetry, no network access
-3. No features outside `PLAN.md` without asking first
+3. No new features without asking first

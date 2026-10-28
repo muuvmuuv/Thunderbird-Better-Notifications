@@ -3,7 +3,12 @@
  * script and the options page.
  */
 
-/** Settings used for every key `storage.local` does not hold yet. */
+/**
+ * Settings used for every key `storage.local` does not hold yet. `accounts`
+ * maps an account ID to `{ enabled, badge, folders }`, where `folders` maps a
+ * folder path to an on/off notification override. Unset keys fall back as
+ * `accountNotifies`, `countsInBadge` and `shouldNotify` describe.
+ */
 export const DEFAULTS = {
   defaultEnabled: true,
   collapseThreshold: 3,
