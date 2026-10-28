@@ -4,7 +4,7 @@ Thunderbird MailExtension that replaces the native new mail notifications and fi
 
 ## Scope
 
-* Manifest V3, Thunderbird 128 or newer
+* Manifest V3, Thunderbird 142 or newer (the badge experiment needs the `MailNotificationService` singleton added in 142)
 * No Experiment APIs except the badge filter (phase 8), no bundler, no dependencies
 * Plain ES modules, plain DOM in the options page
 * Local install only, not published on ATN

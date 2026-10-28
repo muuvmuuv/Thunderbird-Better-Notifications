@@ -4,7 +4,7 @@ Thunderbird MailExtension for notifications per account and folder. Built follow
 
 ## Stack
 
-* Manifest V3, Thunderbird 128+
+* Manifest V3, Thunderbird 142+
 * Plain ES modules, no bundler, no TypeScript, no dependencies
 * Options page with plain DOM and CSS, no framework
 
