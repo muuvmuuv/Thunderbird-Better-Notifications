@@ -1,0 +1,58 @@
+# Account Notify
+
+A Thunderbird add-on that replaces the built-in new mail alerts with notifications you switch on or off per account and per folder. It can also keep accounts out of the unread count on the app icon.
+
+Made for mailboxes you only connect to look into now and then while someone else takes care of them.
+
+## Features
+
+- Notifications per account, with an inherit, on or off override per folder
+- Several messages arriving in one folder at once become one grouped notification (the threshold is configurable)
+- Clicking a notification opens the message, or the folder for a grouped one
+- A “Badge” checkbox per account decides whether its unread mail counts on the app icon (Dock or taskbar)
+- Junk, trash, drafts, sent, archives, templates and outbox never notify
+
+## Install
+
+Requires Thunderbird 142 or newer.
+
+1. Download [`account-notify.xpi`](https://github.com/muuvmuuv/Thunderbird-Better-Notifications/releases/latest/download/account-notify.xpi) from the latest release.
+2. In Thunderbird, open Add-ons and Themes, click the gear and choose “Install Add-on From File…”.
+3. Confirm the request for full access (see [below](#why-full-access)).
+4. Turn off Thunderbird’s own alerts, or every message notifies twice: Settings › General › Email notifications, untick “Show an alert for new emails” and the sound option.
+
+On macOS, notifications also need to be allowed for Thunderbird under System Settings › Notifications.
+
+The add-on is not on addons.thunderbird.net and does not update itself. Install a new release the same way.
+
+## Settings
+
+Open the add-on’s options in Add-ons and Themes.
+
+- **Notify by default**: applies to accounts you have not switched on or off yourself.
+- **Group into one notification**: how many messages a folder must receive at once to get a single notification.
+- Per account, **Notify** and **Badge**, plus **Notifications per folder** for overrides on single folders.
+
+Every change applies right away.
+
+## Why full access?
+
+No regular add-on API can change the unread count on the app icon. The badge filter is a small experiment (`api/unreadBadge`) that hooks into Thunderbird’s internal count, and Thunderbird grants every experiment full access. Everything else uses the regular APIs with the `accountsRead`, `messagesRead`, `notifications` and `storage` permissions. The add-on makes no network requests and collects no data.
+
+## Limitations
+
+- Local Folders do not report new mail, so POP accounts that use the global inbox do not notify.
+- Notifications have no action buttons (mark as read, delete), because the add-on API does not support them.
+- Settings are tied to Thunderbird’s internal account IDs. After recreating an account or switching profiles, set it up again.
+- The badge filter relies on Thunderbird internals and can break with a Thunderbird update.
+- With the app icon set to show “Total new messages”, the badge filter only applies to mail arriving after a change.
+
+## Development
+
+- Load the add-on from source: Tools › Developer Tools › Debug Add-ons › Load Temporary Add-on, then pick `manifest.json`.
+- Run the tests with `node --test`.
+- To release, bump `version` in `manifest.json`, commit, then tag and push `v<version>`. The release workflow checks that tag and version match, runs the tests and attaches `account-notify.xpi` to a GitHub release.
+
+## License
+
+[EUPL-1.2](LICENSE)

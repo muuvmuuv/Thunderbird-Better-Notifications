@@ -13,6 +13,7 @@
   "permissions": ["accountsRead", "messagesRead", "notifications", "storage"],
   "background": { "scripts": ["background.js"], "type": "module" },
   "options_ui": { "page": "options/options.html" },
+  "homepage_url": "https://github.com/muuvmuuv/Thunderbird-Better-Notifications",
   "experiment_apis": {
     "unreadBadge": {
       "schema": "api/unreadBadge/schema.json",
