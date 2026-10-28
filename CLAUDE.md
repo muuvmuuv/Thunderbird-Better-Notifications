@@ -1,37 +1,37 @@
 # Account Notify
 
-Thunderbird MailExtension für Benachrichtigungen pro Konto und Ordner. Umsetzung nach `PLAN.md`, Phase für Phase.
+Thunderbird MailExtension for notifications per account and folder. Built following `PLAN.md`, phase by phase.
 
 ## Stack
 
 * Manifest V3, Thunderbird 128+
-* Plain ES Modules, kein Bundler, kein TypeScript, keine Dependencies
-* Options Page mit plain DOM und CSS, kein Framework
+* Plain ES modules, no bundler, no TypeScript, no dependencies
+* Options page with plain DOM and CSS, no framework
 
-## API-Regeln
+## API rules
 
-1. Namespace `messenger.*` verwenden, nicht `browser.*`.
-2. Einzige Doku-Quelle: https://webextension-api.thunderbird.net/en/latest-mv3/. Nicht MDN, nicht Chrome-Doku, keine Firefox-Beispiele ungeprüft übernehmen.
-3. Signaturen und Property-Namen vor der Verwendung gegen die MV3-Doku prüfen. MV2-Muster sind tabu: `folder.type` (stattdessen `folder.specialUse`, ein Array), `MailFolder` als Parameter (stattdessen `MailFolderId`, also `folder.id`), `browser_action` (stattdessen `action`).
-4. Keine Experiment APIs, einzige Ausnahme ist `api/unreadBadge` für den App-Icon-Badge. Es bleibt ein dünner Hook, die Entscheidung trifft der Background. Wenn sonst etwas nur per Experiment geht, als Einschränkung dokumentieren statt es zu bauen.
-5. Permissions minimal halten: `accountsRead`, `messagesRead`, `notifications`, `storage`. Neue Permission nur mit Begründung.
+1. Use the `messenger.*` namespace, not `browser.*`.
+2. Only documentation source: https://webextension-api.thunderbird.net/en/latest-mv3/. Not MDN, not the Chrome docs, no Firefox examples taken over unchecked.
+3. Check signatures and property names against the MV3 docs before using them. MV2 patterns are off limits: `folder.type` (use `folder.specialUse`, an array), `MailFolder` as a parameter (use `MailFolderId`, i.e. `folder.id`), `browser_action` (use `action`).
+4. No Experiment APIs; the only exception is `api/unreadBadge` for the app icon badge. It stays a thin hook, the background makes the decisions. Anything else that only works via an experiment gets documented as a limitation instead of built.
+5. Keep permissions minimal: `accountsRead`, `messagesRead`, `notifications`, `storage`. A new permission only with a stated reason.
 
 ## Background
 
-1. Der Background ist eine Event Page und wird entladen. Alle Listener synchron auf Top-Level registrieren, nie innerhalb von `async` Init-Funktionen oder nach einem `await`.
-2. Kein globaler State. Alles, was einen Neustart des Backgrounds überleben muss, liegt in `messenger.storage.local`.
-3. Config bei jedem Event frisch laden, nicht cachen.
+1. The background is an event page and gets unloaded. Register all listeners synchronously at top level, never inside `async` init functions or after an `await`.
+2. No global state. Everything that has to survive a background restart lives in `messenger.storage.local`.
+3. Load the config fresh on every event, do not cache it.
 
-## Code-Stil
+## Code style
 
-1. Bezeichner, Kommentare und UI-Strings auf Englisch
-2. `async`/`await`, keine Promise-Ketten
-3. Kleine, reine Funktionen in `config.js` (insbesondere `shouldNotify`), Seiteneffekte nur in `background.js` und `options.js`
-4. Fehler in Listenern mit `console.error` loggen und schlucken, damit ein Fehler den Listener nicht dauerhaft bricht
-5. Keine `innerHTML` Zuweisungen mit Daten aus Nachrichten oder Kontonamen, nur `textContent`
+1. Identifiers, comments and UI strings in English
+2. `async`/`await`, no promise chains
+3. Small, pure functions in `config.js` (notably `shouldNotify`), side effects only in `background.js` and `options.js`
+4. Log errors in listeners with `console.error` and swallow them, so one error does not break the listener for good
+5. No `innerHTML` assignments with data from messages or account names, only `textContent`
 
-## Nicht tun
+## Don't
 
-1. Keine Build-Pipeline, kein `package.json`, kein Linter-Setup einführen
-2. Keine Telemetrie, keine Netzwerkzugriffe
-3. Keine Features außerhalb von `PLAN.md` ohne Rückfrage
+1. Do not introduce a build pipeline, a `package.json` or a linter setup
+2. No telemetry, no network access
+3. No features outside `PLAN.md` without asking first
