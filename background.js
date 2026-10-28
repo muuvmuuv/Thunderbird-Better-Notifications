@@ -28,7 +28,7 @@ async function updateBadgeFilter() {
     const excluded = accounts.filter((account) => !countsInBadge(config, account.id));
     await messenger.unreadBadge.setExcludedAccounts(excluded.map((account) => account.id));
   } catch (error) {
-    console.error("Account Notify: updating the badge filter failed", error);
+    console.error("Better Notifications: updating the badge filter failed", error);
   }
 }
 
@@ -51,7 +51,7 @@ async function onNewMail(folder, list) {
 
     await notify(config, folder, fresh);
   } catch (error) {
-    console.error("Account Notify: handling new mail failed", error);
+    console.error("Better Notifications: handling new mail failed", error);
   }
 }
 
@@ -93,7 +93,7 @@ async function onNotificationClicked(notificationId) {
     await messenger.windows.update(tab.windowId, { focused: true });
     await messenger.notifications.clear(notificationId);
   } catch (error) {
-    console.error("Account Notify: opening notification failed", error);
+    console.error("Better Notifications: opening notification failed", error);
   }
 }
 

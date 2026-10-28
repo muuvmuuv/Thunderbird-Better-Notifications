@@ -33,7 +33,7 @@ try {
   syncAccountToggles();
   document.getElementById("no-accounts").hidden = accounts.length > 0;
 } catch (error) {
-  console.error("Account Notify: listing accounts failed", error);
+  console.error("Better Notifications: listing accounts failed", error);
 }
 
 function renderAccount(account) {
@@ -75,7 +75,7 @@ async function loadFolders(account, list) {
     const folders = await messenger.folders.getSubFolders(account.rootFolder.id, true);
     appendFolders(account.id, folders, list, 0);
   } catch (error) {
-    console.error("Account Notify: loading folders failed", error);
+    console.error("Better Notifications: loading folders failed", error);
   }
 }
 
@@ -115,6 +115,6 @@ async function save() {
   try {
     await saveConfig(config);
   } catch (error) {
-    console.error("Account Notify: saving settings failed", error);
+    console.error("Better Notifications: saving settings failed", error);
   }
 }

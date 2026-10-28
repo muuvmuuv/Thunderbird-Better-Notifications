@@ -1,4 +1,4 @@
-# Account Notify
+# Better Notifications
 
 Thunderbird MailExtension for notifications and the app icon badge per account and folder. `README.md` covers features, setup and known limitations.
 

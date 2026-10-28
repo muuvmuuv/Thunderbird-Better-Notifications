@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Account Notify",
+  "name": "Better Notifications",
   "version": "0.2.1",
   "description": "New mail notifications and app icon badge per account and folder.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "account-notify@marvin.digital",
+      "id": "better-notifications@marvin.digital",
       "strict_min_version": "142.0"
     }
   },

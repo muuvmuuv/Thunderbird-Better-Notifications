@@ -1,4 +1,4 @@
-# Account Notify
+# Better Notifications
 
 A Thunderbird add-on that replaces the built-in new mail alerts with notifications you switch on or off per account and per folder. It can also keep accounts out of the unread count on the app icon.
 
@@ -16,7 +16,7 @@ Made for mailboxes you only connect to look into now and then while someone else
 
 Requires Thunderbird 142 or newer.
 
-1. Download [`account-notify.xpi`](https://github.com/muuvmuuv/Thunderbird-Better-Notifications/releases/latest/download/account-notify.xpi) from the latest release.
+1. Download [`better-notifications.xpi`](https://github.com/muuvmuuv/Thunderbird-Better-Notifications/releases/latest/download/better-notifications.xpi) from the latest release.
 2. In Thunderbird, open Add-ons and Themes, click the gear and choose “Install Add-on From File…”.
 3. Confirm the request for full access (see [below](#why-full-access)).
 4. Turn off Thunderbird’s own alerts, or every message notifies twice: Settings › General › Email notifications, untick “Show an alert for new emails” and the sound option.
@@ -51,7 +51,7 @@ No regular add-on API can change the unread count on the app icon. The badge fil
 
 - Load the add-on from source: Tools › Developer Tools › Debug Add-ons › Load Temporary Add-on, then pick `manifest.json`.
 - Run the tests with `node --test`.
-- To release, bump `version` in `manifest.json`, commit, then tag and push `v<version>`. The release workflow checks that tag and version match, runs the tests and attaches `account-notify.xpi` to a GitHub release.
+- To release, bump `version` in `manifest.json`, commit, then tag and push `v<version>`. The release workflow checks that tag and version match, runs the tests and attaches `better-notifications.xpi` to a GitHub release.
 
 ## License
 
