@@ -32,6 +32,6 @@ Thunderbird MailExtension for notifications per account and folder. Built follow
 
 ## Don't
 
-1. Do not introduce a build pipeline, a `package.json` or a linter setup
+1. Do not introduce a build step, a `package.json` or a linter setup. The release workflow only zips the files as they are.
 2. No telemetry, no network access
 3. No features outside `PLAN.md` without asking first
