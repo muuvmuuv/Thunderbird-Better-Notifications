@@ -13,7 +13,7 @@ Thunderbird MailExtension for notifications and the app icon badge per account a
 1. Use the `messenger.*` namespace, not `browser.*`.
 2. Only documentation source: https://webextension-api.thunderbird.net/en/latest-mv3/. Not MDN, not the Chrome docs, no Firefox examples taken over unchecked.
 3. Check signatures and property names against the MV3 docs before using them. MV2 patterns are off limits: `folder.type` (use `folder.specialUse`, an array), `MailFolder` as a parameter (use `MailFolderId`, i.e. `folder.id`), `browser_action` (use `action`).
-4. No Experiment APIs; the only exception is `api/unreadBadge` for the app icon badge. It stays a thin hook, the background makes the decisions. Anything else that only works via an experiment gets documented as a limitation instead of built.
+4. No Experiment APIs; the only exception is `api/unreadBadge` for the app icon badge. It stays a thin hook, the background makes the decisions. Anything else that only works via an experiment gets documented as a limitation instead of built. ATN rejected 0.2.2 for this experiment and is not accepting new ones, so distribute from GitHub releases until a normal API can replace it. Listing texts stay in `STORE.md`. Do not upload to ATN while the experiment is still required.
 5. Keep permissions minimal: `accountsRead`, `messagesRead`, `notifications`, `storage`. A new permission only with a stated reason.
 
 ## Background

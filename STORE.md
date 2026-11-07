@@ -2,6 +2,8 @@
 
 Texts for the listing on addons.thunderbird.net (ATN). ATN keeps the listing per language, so the texts come in English and German. ATN has no API for the listing, so these are entered by hand.
 
+On hold. ATN rejected 0.2.2 because `api/unreadBadge` is not a published Experiment draft, and new add-ons that ship one are not accepted. Distribution until then is the GitHub release. Submit these texts when a normal API can replace the experiment, or when ATN accepts it.
+
 ## Same in every language
 
 **Name**
